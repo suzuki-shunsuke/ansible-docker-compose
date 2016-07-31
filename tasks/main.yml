@@ -1,2 +1,7 @@
 ---
 # tasks file for docker-compose
+- name: Install docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.8.0-rc2/docker-compose-{{ansible_system}}-{{ansible_architecture}}
+    dest: /usr/local/bin/docker-compose mode=0755
+  become: "{{ docker_compose_nonroot }}"
