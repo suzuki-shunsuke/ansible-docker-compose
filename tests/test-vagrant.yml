@@ -1,0 +1,10 @@
+---
+- hosts: default
+  roles:
+  - {role: suzuki-shunsuke.docker-ubuntu}
+  - ansible-docker-compose
+- hosts: default
+  tasks:
+  - command: docker-compose --version
+    register: result
+  - debug: var=result
