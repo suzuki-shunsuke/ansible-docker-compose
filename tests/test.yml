@@ -5,6 +5,6 @@
   - role: suzuki-shunsuke.docker-ubuntu
   - ansible-docker-compose
   tasks:
-  - command: docker-compse --version
+  - command: docker-compose --version
     register: result
   - debug: var=result
