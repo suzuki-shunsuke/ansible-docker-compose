@@ -15,7 +15,7 @@ addons:
 before_install: cd tests
 
 install:
-- ansible-galaxy install -r roles.txt
+- ansible-galaxy install -r roles.yml
 
 script:
 - ansible-playbook test.yml
