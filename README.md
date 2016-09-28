@@ -28,7 +28,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-  - { role: suzuki-shunsuke.docker-compose }
+  - role: suzuki-shunsuke.docker-compose
 ```
 
 License

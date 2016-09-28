@@ -2,4 +2,9 @@
 - hosts: localhost
   connection: local
   roles:
+  - role: suzuki-shunsuke.ansible-docker-ubuntu
   - ansible-docker-compose
+  tasks:
+  - command: docker-compse --version
+    register: result
+  - debug: var=result
