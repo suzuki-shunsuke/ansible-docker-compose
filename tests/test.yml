@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: local
   roles:
-  - role: suzuki-shunsuke.ansible-docker-ubuntu
+  - role: suzuki-shunsuke.docker-ubuntu
   - ansible-docker-compose
   tasks:
   - command: docker-compse --version
