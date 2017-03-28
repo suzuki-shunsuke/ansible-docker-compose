@@ -15,7 +15,9 @@ Requirements
 Role Variables
 --------------
 
-* docker_compose_nonroot: Whether the remote_user is root or not. This variable is set automatically, and is used to execute tasks with the become option.
+* docker_compose_path: the path where docker-compose is installed. The default is /usr/local/bin
+* docker_compose_mode: the permission of the docker-compose. The default is 0755
+* docker_compose_version: docker-compose version. The default is `1.11.2`
 
 Dependencies
 ------------
