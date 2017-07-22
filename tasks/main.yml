@@ -1,8 +1,37 @@
 ---
 # tasks file for docker-compose
-- name: Install docker-compose
-  get_url:
-    url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-{{ansible_system}}-{{ansible_architecture}}
-    dest: "{{'{}/docker-compose'.format(docker_compose_path)}}"
-    mode: "{{docker_compose_mode}}"
-  become: "{{docker_compose_nonroot}}"
+- name: check whether the binary has already installed
+  stat:
+    path: "{{docker_compose_lib_dir}}/docker-compose-{{docker_compose_version}}"
+  register: lib_stat
+- block:
+  - name: mkdir docker_compose_lib_dir
+    file:
+      state: directory
+      dest: "{{docker_compose_lib_dir}}"
+  - name: install docker-compose
+    get_url:
+      url: https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-{{ansible_system}}-{{ansible_architecture}}
+      dest: "{{docker_compose_lib_dir}}/docker-compose-{{docker_compose_version}}"
+      mode: "{{docker_compose_mode}}"
+  when: not lib_stat.stat.exists
+- name: mkdir docker_compose_bin_dir
+  file:
+    state: directory
+    dest: "{{docker_compose_bin_dir}}"
+- name: check whether the binary has already installed
+  stat:
+    path: "{{docker_compose_bin_dir}}/docker-compose"
+  register: st
+- debug:
+    var: st
+- name: remove symbolic link
+  file:
+    state: absent
+    path: "{{docker_compose_bin_dir}}/docker-compose"
+  when: st.stat.exists and (not st.stat.islnk or st.stat.lnk_source != "{}/docker-compose-{}".format(docker_compose_lib_dir, docker_compose_version))
+- name: create symbolic link
+  file:
+    state: link
+    src: "{{docker_compose_lib_dir}}/docker-compose-{{docker_compose_version}}"
+    dest: "{{docker_compose_bin_dir}}/docker-compose"
