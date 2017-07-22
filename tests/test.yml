@@ -1,10 +1,16 @@
 ---
-- hosts: default
+- hosts: all
   roles:
-  - suzuki-shunsuke.docker-ubuntu
-  - ansible-docker-compose
+  - role: suzuki-shunsuke.docker-ubuntu
+    when: ansible_os_family == 'Debian'
+  - role: suzuki-shunsuke.docker-ce-centos
+    when: ansible_os_family == 'RedHat'
+  - role: ansible-docker-compose
+    docker_compose_version: 1.13.0
+    docker_compose_lib_dir: "{{ansible_env.HOME}}/lib"
+    docker_compose_bin_dir: "{{ansible_env.HOME}}/bin"
   tasks:
-  - command: docker-compose --version
+  - command: "{{ansible_env.HOME}}/bin/docker-compose --version"
     register: result
     changed_when: false
   - debug:

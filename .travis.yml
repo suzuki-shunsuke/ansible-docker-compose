@@ -4,6 +4,7 @@ python: "2.7"
 
 sudo: required
 dist: trusty
+group: deprecated-2017Q2
 
 addons:
   apt:

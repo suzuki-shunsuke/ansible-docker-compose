@@ -1,1 +1,2 @@
-- src: suzuki-shunsuke.docker-ubuntu
+- suzuki-shunsuke.docker-ubuntu
+- suzuki-shunsuke.docker-ce-centos
