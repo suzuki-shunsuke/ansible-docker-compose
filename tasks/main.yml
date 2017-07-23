@@ -23,8 +23,6 @@
   stat:
     path: "{{docker_compose_bin_dir}}/docker-compose"
   register: st
-- debug:
-    var: st
 - name: remove symbolic link
   file:
     state: absent
