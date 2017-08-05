@@ -1,0 +1,19 @@
+- include_role:
+    name: suzuki-shunsuke.docker-ubuntu
+  become: yes
+  when: ansible_os_family == 'Debian'
+- include_role:
+    name: suzuki-shunsuke.docker-ce-centos
+  become: yes
+  when: ansible_os_family == 'RedHat'
+- include_role:
+    name: ansible-docker-compose
+  vars:
+    docker_compose_version: 1.15.0
+    docker_compose_lib_dir: "{{ansible_env.HOME}}/lib"
+    docker_compose_bin_dir: "{{ansible_env.HOME}}/bin"
+- command: "{{ansible_env.HOME}}/bin/docker-compose --version"
+  register: result
+  changed_when: false
+- debug:
+    var: result

@@ -1,2 +1,3 @@
-[default]
-ansible_connection=local
+[localhost]
+ubuntu
+centos
