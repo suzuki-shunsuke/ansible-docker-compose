@@ -14,8 +14,8 @@ https://galaxy.ansible.com/suzuki-shunsuke/docker-compose/
 
 name | required | default | example | description
 --- | --- | --- | --- | ---
-docker_compose_bin_dir: no | /usr/local/bin | | the directory path where the binary of docker-compose is installed
-docker_compose_lib_dir: no | /usr/local/lib | | the directory path where the binary of docker-compose is installed
+docker_compose_bin_dir | no | /usr/local/bin | | the directory path where the binary of docker-compose is installed
+docker_compose_lib_dir | no | /usr/local/lib | | the directory path where the binary of docker-compose is installed
 docker_compose_mode | no | 0755 | | the permission of the binary of docker-compose
 docker_compose_version | yes | | 1.14.0 | docker-compose version
 
