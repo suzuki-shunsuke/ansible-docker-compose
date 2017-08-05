@@ -5,10 +5,18 @@ python: "2.7"
 sudo: required
 dist: trusty
 
-before_install: cd tests
+addons:
+  apt:
+    sources:
+    - sourceline: ppa:ansible/ansible
+    packages:
+    - ansible
+
+before_install:
+- ansible --version
+- cd tests
 
 install:
-- pip install ansible
 - ansible-galaxy install -r roles.yml
 
 script:
