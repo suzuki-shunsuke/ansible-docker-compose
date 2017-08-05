@@ -2,11 +2,13 @@
 - hosts: all
   roles:
   - role: suzuki-shunsuke.docker-ubuntu
+    become: yes
     when: ansible_os_family == 'Debian'
   - role: suzuki-shunsuke.docker-ce-centos
+    become: yes
     when: ansible_os_family == 'RedHat'
   - role: ansible-docker-compose
-    docker_compose_version: 1.13.0
+    docker_compose_version: 1.15.0
     docker_compose_lib_dir: "{{ansible_env.HOME}}/lib"
     docker_compose_bin_dir: "{{ansible_env.HOME}}/bin"
   tasks:
